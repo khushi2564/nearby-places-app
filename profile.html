@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile - Smart Nearby Helper</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+
+<body class="home-bg">
+
+  <!-- Title -->
+  <h1>Smart Nearby Helper</h1>
+  <p class="tagline">Your Profile 👤</p>
+
+  <!-- Profile Box -->
+  <div class="login-box">
+
+    <h2>User Profile</h2>
+
+    <p><strong>Name:</strong> <span id="name">Loading...</span></p>
+    <p><strong>Email:</strong> <span id="email">Loading...</span></p>
+
+    <button onclick="logout()">Logout</button>
+
+  </div>
+
+  <!-- JS -->
+  <script>
+    // 🔍 Raw data check
+    let userData = localStorage.getItem("user");
+    console.log("Raw localStorage:", userData);
+
+    // ❌ agar data missing ya invalid hai
+    if (!userData || userData === "undefined") {
+      alert("Please login first ❌");
+      window.location.href = "login.html";
+    } else {
+      try {
+        const user = JSON.parse(userData);
+
+        console.log("Parsed user:", user);
+
+        // ✅ show data safely
+        document.getElementById("name").innerText = user.name || "Not available";
+        document.getElementById("email").innerText = user.email || "Not available";
+
+      } catch (error) {
+        console.log("JSON error:", error);
+
+        // corrupted data → clear & redirect
+        localStorage.removeItem("user");
+        alert("Session error, please login again ❌");
+        window.location.href = "login.html";
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("user");
+      alert("Logged out successfully 👋");
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>

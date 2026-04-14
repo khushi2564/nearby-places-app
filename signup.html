@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup - Smart Nearby Helper</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+
+<body class="home-bg">
+
+  <h1>Smart Nearby Helper</h1>
+  <p class="tagline">Create your account</p>
+
+  <div class="login-box">
+
+    <h2>Signup</h2>
+
+    <form id="signupForm">
+
+      <input type="text" id="name" placeholder="Name" required>
+
+      <input type="email" id="email" placeholder="Email" required>
+
+      <input 
+        type="password" 
+        id="password"
+        placeholder="Password"
+        minlength="8"
+        required
+      >
+
+      <button type="submit">Register</button>
+
+    </form>
+
+    <p class="extra-text">
+      Already have an account? <a href="login.html">Login</a>
+    </p>
+
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const response = await fetch("http://localhost:5000/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
+
+        alert(data.message);
+
+        // ✅ ONLY redirect if success
+        if (data.message.includes("success")) {
+          window.location.href = "login.html";
+        }
+
+      } catch (error) {
+        alert("Server error ❌");
+        console.log(error);
+      }
+    });
+  </script>
+
+</body>
+</html>

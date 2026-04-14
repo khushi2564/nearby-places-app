@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Smart Nearby Helper</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+
+<body class="home-bg">
+
+  <h1>Smart Nearby Helper</h1>
+  <p class="tagline">Welcome back </p>
+
+  <div class="login-box">
+
+    <h2>Login</h2>
+
+    <form id="loginForm">
+
+      <input 
+        type="email" 
+        id="email" 
+        placeholder="Email" 
+        required
+      >
+
+      <input 
+        type="password" 
+        id="password"
+        placeholder="Password"
+        minlength="8"
+        required
+      >
+
+      <button type="submit">Login</button>
+
+    </form>
+
+    <p class="extra-text">
+      Don't have an account? <a href="signup.html">Signup</a>
+    </p>
+
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      // basic validation
+      if (!email || !password) {
+        alert("Please fill all fields ❌");
+        return;
+      }
+
+      try {
+        const response = await fetch("http://localhost:5000/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        console.log("Login response:", data); // 🔍 DEBUG
+
+        alert(data.message);
+
+        if (data.success && data.user) {
+
+          // ✅ Clear old data (important)
+          localStorage.removeItem("user");
+
+          // ✅ Save fresh user data
+          localStorage.setItem("user", JSON.stringify(data.user));
+
+          console.log("Saved in localStorage:", localStorage.getItem("user"));
+
+          // ✅ Redirect to HOME page
+          window.location.href = "index.html";
+
+        } else {
+          console.log("Login failed:", data.message);
+        }
+
+      } catch (error) {
+        alert("Server error ❌");
+        console.log("Error:", error);
+      }
+    });
+  </script>
+
+</body>
+</html>

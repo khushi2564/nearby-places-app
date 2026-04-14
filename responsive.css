@@ -1,0 +1,93 @@
+/* =========================
+   MOBILE (max-width: 768px)
+========================= */
+
+@media (max-width: 768px) {
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .tagline {
+    font-size: 14px;
+  }
+
+  /* Navbar */
+  .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav a {
+    margin: 5px 0;
+  }
+
+  /* Categories stack */
+  .categories {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 80%;
+  }
+
+  /* Feature box */
+  .feature-box {
+    width: 90%;
+    padding: 20px;
+  }
+
+  /* Login / Signup box */
+  .login-box {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .login-box input {
+    font-size: 14px;
+  }
+
+  .login-box button {
+    font-size: 14px;
+  }
+
+  footer {
+    font-size: 12px;
+  }
+}
+
+
+/* =========================
+   SMALL MOBILE (max-width: 480px)
+========================= */
+
+@media (max-width: 480px) {
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .card {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .login-box {
+    width: 95%;
+  }
+
+  .feature-box {
+    width: 95%;
+  }
+
+}

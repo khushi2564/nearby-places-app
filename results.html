@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nearby Results</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+  <h2>Nearby Places</h2>
+  <div id="results"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+
+    document.getElementById("results").innerHTML =
+      `<p>Showing nearby ${type}s (demo data)</p>`;
+
+    // Later you can integrate real API here
+  </script>
+</body>
+</html>

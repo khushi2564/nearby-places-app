@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <meta charset="UTF-8">
+  <title>Smart Nearby Helper</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+
+<body class="home-bg">
+
+  <!-- 🔐 PROTECTION (IMPORTANT) -->
+  <script>
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <h1>Smart Nearby Helper</h1>
+  <p class="tagline">Find everything around you, instantly</p>
+
+  <!-- 👤 USER WELCOME -->
+  <p id="welcomeUser"></p>
+
+  <nav class="nav">
+    <a href="profile.html">Profile</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </nav>
+
+  <h2>Choose a Category</h2>
+
+  <section class="categories">
+
+    <div class="card" onclick="findNearby('restaurant')">
+      <span>🍔</span>
+      <p><b>Restaurants</b></p>
+    </div>
+
+    <div class="card" onclick="findNearby('hospital')">
+      <span>🏥</span>
+      <p><b>Hospitals</b></p>
+    </div>
+
+    <div class="card" onclick="findNearby('atm')">
+      <span>💳</span>
+      <p><b>ATM</b></p>
+    </div>
+
+    <div class="card" onclick="findNearby('library')">
+      <span>📚</span>
+      <p><b>Library</b></p>
+    </div>
+
+    <div class="card" onclick="findNearby('pharmacy')">
+      <span>💊</span>
+      <p><b>Pharmacy</b></p>
+    </div>
+
+    <div class="card" onclick="findNearby('bank')">
+      <span>🏦</span>
+      <p><b>Bank</b></p>
+    </div>
+
+    <div class="card" onclick="findNearby('school')">
+      <span>🏫</span>
+      <p><b>School</b></p>
+    </div>
+
+    <div class="card" onclick="findNearby('cafe')">
+      <span>☕</span>
+      <p><b>Cafe</b></p>
+    </div>
+
+  </section>
+
+  <!-- 🗺️ MAP -->
+  <div class="map-container">
+    <h2>Nearby Map Preview</h2>
+    <div id="map"></div>
+  </div>
+
+  <!-- 📍 PLACES LIST -->
+  <div id="places-list"></div>
+
+  <!-- ⭐ INFO -->
+  <section class="feature-box">
+    <h3>Why Smart Nearby Helper?</h3>
+    <p>
+      Quickly find places around you without any hassle. 
+      Simple, fast, and useful for everyday needs.
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Smart Nearby Helper | By-Khushi Jain</p>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // 👋 Show user name
+    if (user) {
+      document.getElementById("welcomeUser").innerText =
+        "Welcome, " + user.name ;
+    }
+
+    // 🚪 Logout
+    function logout() {
+      localStorage.removeItem("user");
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
